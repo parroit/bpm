@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Browser Package Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="carousel.css" rel="stylesheet">
+
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+</head>
+<body>
+
+
+    <div class="container marketing">
+        <div class="row">
+            <div class="col-md-12 navbar-wrapper">
+
+                <div class="navbar navbar-static-top">
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><img src="img/logo.png"></a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/index.html">Home</a></li>
+                            <li class="dropdown" ng-class="{hide:user==null}">
+                                <a class="dropdown-toggle" href="#"
+                                   data-toggle="dropdown"
+                                        >Packages Repository <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/tbd.html">Browse public repository</a></li>
+                                    <li><a href="/tbd.html">Publish a new library</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/tbd.html">My account</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row featurette heading">
+            <div class="col-md-6">
+                <img class="featurette-image img-responsive" src="img/bpm.png">
+            </div>
+            <div class="col-md-6">
+                <h2 class="featurette-heading presentation">Package your browser Javascript libraries. <span class="text-muted">The same way as you do with Node.</span>
+                </h2>
+
+                <p class="lead">
+                    If are you tired of customizing your library to allow it's use from both npm and require.js,
+                    try bpm, it's easier!
+
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            <div class="col-lg-4">
+                <img class="img-circle" src="img/easy.jpg">
+
+                <h2>Easy to use</h2>
+
+                <p>
+                    The same code work in node.js and in your users browser!
+                </p>
+
+
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img class="img-circle" src="img/mobile.png">
+
+                <h2>Usable from everywhere</h2>
+
+                <p>
+                    Work on every evergreen browser, on desktop, smart phone or tablet.
+
+                </p>
+
+
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img class="img-circle" src="img/business.jpg">
+
+                <h2>It's open source</h2>
+
+                <p>
+                    You can improve it. You can customize it. You can help us!
+                </p>
+
+
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+
+
+        <!-- START THE FEATURETTES -->
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Ok, some example of the code involved?<span
+                        class="text-muted">How does it work?</span></h2>
+
+                <p class="lead">
+                    The idea is simple: you include bpm.js with a normal script tag, and than
+                    you choose a package to start your js application.
+                    The package you specify is download for a public repo via ajax, saved to local
+                    file system, and required from there.
+
+                    <pre>
+                        &lt;script src="bpm.js">&lt;/script>
+                        &lt;script>
+                            bpm.start("test","0.1.1",function(){
+                                var foo = require("foo");
+                                var baz = require("baz");
+
+                            });
+                        &lt;/script>
+
+                    </pre>
+
+                    <p>This is main.js from test package:</p>
+
+                    <pre>
+                        var foo = require("foo");
+                        var baz = require("baz");
+                        exports.log = function() {
+                            foo.ler();
+                            baz.mania();
+                        }
+
+                    </pre>
+
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive" src="img/files.jpg">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive" src="img/oss.jpg">
+            </div>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">It's open source.<span
+                        class="text-muted">It's customizable for your needs</span></h2>
+
+                <p class="lead">
+                    BPM is open source, and always will be. <br>
+                    This give you the possibility of customizing the site according to your needs.<br>
+                    You can help the projects by <a href="https://github.com/parroit/bpm/fork">contributing to the source code</a>,
+                    by <a href="#donate">giving me a donation</a> or simply by subscribing to our
+                    <a href="/tbd.html">supporting hosting plan</a>
+
+                </p>
+                <p>
+
+                    <form id ="donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <h4>Make the project improve with a donation:</h4>
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="RPD6NS8FA4TFY">
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                        <img alt="" border="0" src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+                    </form>
+                </p>
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette contacts">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Contact us. <span class="text-muted">And spread the voice.</span></h2>
+
+                <p class="lead">
+                    <a href="https://github.com/parroit/bpm"><i class="icon-github icon-4"></i> Github project</a><br>
+                    <a href="https://twitter.com/ebansoftware"><i class="icon-twitter icon-4"></i> Follow me on twitter</a><br>
+                    <a href="mailto:andrea.parodi@ebansoftware.net"><i class="icon-envelope icon-4"></i> Drop me an e-mail</a>
+
+
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive" src="img/megafono.jpg">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+
+        <!-- FOOTER -->
+        <footer>
+            <p class="pull-right"><a href="#">Back to top</a></p>
+
+            <p>&copy; 2013 Eban Software &middot; <a href="/tbd.html">Privacy</a> &middot; <a href="/tbd.html">Terms</a></p>
+        </footer>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+
+
+
+    </body>
+</html>
