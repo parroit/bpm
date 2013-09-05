@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" 
+        content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="../bootstrap/css/bootstrap.min.css" 
+        rel="stylesheet" media="screen">
+    
+
+    
+  </head>
+  
+  <body>
+
+
+    
+    <script src="../jquery-2.0.3.min.js"></script>
+    
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="../../src/zip.js/zip.js"></script>
+    <script src="../../src/zip.js/zip-fs.js"></script>
+    <script src="../../src/zip.js/mime-types.js"></script>
+    <script src="../../src/zip.js/zip-ext.js"></script>
+    <script src="../../src/bpm.js"></script>
+    
+    <script> 
+        bpm.install("test","0.1.1",function(){
+            function logResponse(response){
+                console.log(response);
+            }
+            bpm.isInstalled("test","0.1.1",logResponse);
+            bpm.isInstalled("foo","1.0.0",logResponse);
+            bpm.isInstalled("baz","2.0.0",logResponse);
+            bpm.isInstalled("test","3.1.1",logResponse);
+        });
+    </script>
+  </body>
+</html>
