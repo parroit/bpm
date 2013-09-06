@@ -111,7 +111,7 @@ var bpm = (function () {
                 var url = baseRepoUrl + packageName + "/" + packageVersion + "/package.zip";
 
 
-                zip.workerScriptsPath = "/test/src/zip.js/";
+                zip.workerScriptsPath = "/bpm/test/src/zip.js/";
 
 
                 var zipFs = new zip.fs.FS();
