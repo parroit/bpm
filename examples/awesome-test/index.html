@@ -4,9 +4,19 @@
     <meta name="viewport" 
         content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="../bootstrap/css/bootstrap.min.css" 
-        rel="stylesheet" media="screen">
-    
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
+
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+      <![endif]-->
+
+
 
     
   </head>
@@ -14,10 +24,12 @@
   <body>
 
 
-    
-    <script src="../jquery-2.0.3.min.js"></script>
-    
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
     <script src="../../src/zip.js/zip.js"></script>
     <script src="../../src/zip.js/zip-fs.js"></script>
@@ -25,15 +37,37 @@
     <script src="../../src/zip.js/zip-ext.js"></script>
     <script src="../../src/bpm.js"></script>
     
-    <script> 
-        bpm.install("test","0.1.1",function(){
-            function logResponse(response){
-                console.log(response);
-            }
-            bpm.isInstalled("test","0.1.1",logResponse);
-            bpm.isInstalled("foo","1.0.0",logResponse);
-            bpm.isInstalled("baz","2.0.0",logResponse);
-            bpm.isInstalled("test","3.1.1",logResponse);
+    <script>
+        bpm.useRepository("http://parroit.github.io/bpm/repo/");
+        bpm.createEmptyRepo(function(){
+
+            //testami ver. 0 will check if two independent version
+            //of same module could coesist. module testami
+            //ver. 0.0.0 depend on modules test and baz.
+            //they in turn depend on different version of module foo.
+
+            //if the test pass, they should display two different
+            //alerts
+            bpm.install("testami","0.0.0",function(require) {
+
+                var testModule = require("testami");
+
+                testModule.run();
+            });
+
+            //testami ver. 0 will check if it's possible for
+            //main module of package to call internal submodule.
+            //testami ver. 1 contains main module and logger module.
+
+            //main module just require logger module
+            //and, if test succeed it display an alert.
+            bpm.install("testami","0.0.1",function(require) {
+
+                var testModule = require("testami");
+
+                testModule.run();
+            });
+
         });
     </script>
   </body>
