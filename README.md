@@ -1,5 +1,7 @@
-BPM
+NPM
 ===
+<img src="http://parroit.github.io/bpm/img/logo-solo.png">
+
 
 A javascript package manager that work in the browser, but is compatible with [npm](https://npmjs.org/)
 
