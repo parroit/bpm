@@ -28,7 +28,7 @@
                     request.addEventListener("load", function() {
                         if (request.getResponseHeader("Accept-Ranges") == "bytes"){
                             event.source.postMessage({
-                                response:'callbak',
+                                response:'callback',
                                 size:Number(request.getResponseHeader("Content-Length")),
                                 id:msg.id
                             },event.origin);
@@ -41,13 +41,13 @@
                     request.send();
                     break;
                 default:
-
+                    console.log("ERROR:unknown method "+msg.method);
             }
 
 
 
         },false);
-    }
+    };
     /*
     function CORSProxy(){
         var that = this;
@@ -90,23 +90,36 @@
     }
      */
     var nextDownloadId=1;
-    var currentDownloads={};
+    var currentMessages={};
 
     var CORSProxyClientInitialized =false;
     function initCORSProxyClient(){
         if (CORSProxyClientInitialized ) return;
         CORSProxyClientInitialized = true;
         window.addEventListener('message',function(event) {
+            var msg = event.data;
             if(
-                !event.data.id ||
-                !currentDownloads[event.data.id] ||
-                event.origin !== currentDownloads[event.data.id].foreignSiteProxyURL.substring(0,event.origin.length)
+                !msg.id ||
+                !currentMessages[msg.id] ||
+                event.origin !== currentMessages[msg.id].foreignSiteProxyURL.substring(0,event.origin.length)
                 ) {
                 console.log("Error: message receive from unauthorized origin "+event.origin);
                 return false;
             }
 
-            console.log('response received:  ' + JSON.stringify(event.data));
+            console.log('response received:  ' + JSON.stringify(msg));
+
+            switch (msg.response){
+                case "callback":
+                    currentMessages[msg.id].callback(msg);
+                    break;
+                case "onerror":
+                    currentMessages[msg.id].onerror(msg.error);
+                    break;
+                default:
+                    console.log("ERROR:unknown response "+msg.response);
+            }
+
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -134,17 +147,32 @@
             }
 
             function initDownloadInstance(){
-                var downloadInstance = {
-                    method: "init",
-                    url: url,
-                    id: nextDownloadId,
+                var id = nextDownloadId;
+                nextDownloadId++;
+                
+                currentMessages[id ] = {
+                    id: id,
+                    callback: function(response){
+                        self.size=response.size;
+                        delete currentMessages[id];
+                        callback();
+                    },
+                    onerror : function(err){
+                        delete currentMessages[id];
+                        onerror(err);
+                    },
                     foreignSiteProxyURL:foreignSiteProxyURL
                 };
-                currentDownloads[nextDownloadId] = downloadInstance;
-                nextDownloadId++;
-                self.corsProxyServer.postMessage(downloadInstance, foreignSiteProxyURL);
-                downloadInstance.callback = callback;
-                downloadInstance.onerror = onerror;
+
+
+                var msg = {
+                    method: "init",
+                    url: url,
+                    id: id
+                };
+               
+                self.corsProxyServer.postMessage(msg, foreignSiteProxyURL);
+                
 
             }
 
@@ -160,7 +188,34 @@
 
 
         function readUint8Array(index, length, callback, onerror) {
+            var id = nextDownloadId;
+            nextDownloadId++;
 
+            currentMessages[id ] = {
+                id: id,
+                callback: function(response){
+                    self.size=response.size;
+                    delete currentMessages[id];
+                    callback();
+                },
+                onerror : function(err){
+                    delete currentMessages[id];
+                    onerror(err);
+                },
+                foreignSiteProxyURL:foreignSiteProxyURL
+            };
+
+
+            var msg = {
+                method: "readUint8Array",
+                url: url,
+                id: id ,
+                foreignSiteProxyURL:foreignSiteProxyURL,
+                index: index,
+                length: length
+            };
+
+            self.corsProxyServer.postMessage(msg, foreignSiteProxyURL);
         }
 
         this.size = 0;
