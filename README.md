@@ -5,9 +5,30 @@ A javascript package manager that work in the browser, but is compatible with [n
 
 See more info on [web site](http://parroit.github.io/bpm/)
 
+Concept
+=======
 
-Status
-======
+When you call bpm.install, the library you want to use is loaded
+from the remote repo via async ajax.
+
+The library is packaged as a zip file, following [npm](https://npmjs.org/) or
+[commonjs]([http://wiki.commonjs.org/wiki/CommonJS) standards.
+
+Once retrieved, the zip library is decompressed and saved to
+[local file system] (http://dev.w3.org/2009/dap/file-system/pub/FileSystem/).
+
+Any dependencies of the library is subsequently installed
+in the same way, and once all these steps completed,
+Your bpm install callback is called asynchronously.
+
+Within your callback, you can use require to load modules.
+When you require a module, it is loaded synchronously
+from [local file system] (http://dev.w3.org/2009/dap/file-system/pub/FileSystem/)
+(just as node.js do) and returned to you.
+
+
+Project Status
+==============
 
 Just a proof of concept by now, but, it work!
 Look a sample working on
