@@ -7,6 +7,8 @@ A javascript package manager that work in the browser, but is compatible with [n
 
 See more info on [web site](http://parroit.github.io/bpm/)
 
+
+
 Concept
 =======
 
@@ -28,6 +30,7 @@ When you require a module, it is loaded synchronously
 from [local file system] (http://dev.w3.org/2009/dap/file-system/pub/FileSystem/)
 (just as node.js do) and returned to you.
 
+Please give me some feedback on twitter @EbanSoftware
 
 Project Status
 ==============
