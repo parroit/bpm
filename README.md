@@ -1,9 +1,9 @@
 BPM
 ===
 
-javascript browser package manager
+A javascript package manager that work in the browser, but is compatible with [npm](https://npmjs.org/)
 
-See more info on [http://parroit.github.io/bpm/](web site)
+See more info on [web site](http://parroit.github.io/bpm/)
 
 
 Status
@@ -11,7 +11,7 @@ Status
 
 Just a proof of concept by now, but, it work!
 Look a sample working on
-[a href ="http://parroit.github.io/bpm/test/examples/awesome-test/">this page] (the web site).
+[this example page](http://parroit.github.io/bpm/test/examples/awesome-test/).
 
 This sample page work on last chrome version. Actually it is a blank page, but you
 can see messages on debug console...
@@ -56,7 +56,7 @@ Here is wat it test:
 
 We just started, please hold on!
 
-If you like the idea, [https://github.com/parroit/bpm/star] (please star the project)
+If you like the idea, [please star the project](https://github.com/parroit/bpm/star)
 to keep me going on...
 
 
