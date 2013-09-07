@@ -15,16 +15,30 @@
             }
 
             var msg = event.data;
+            function onError(){
+                event.source.postMessage({
+                    response:'onerror',
+                    error:ERR_HTTP_RANGE,
+                    id:msg.id
+                },event.origin);
+            }
+
+            function readArrayBuffer(callback) {
+                var request = new XMLHttpRequest();
+                request.open("GET", msg.url);
+                request.responseType = "arraybuffer";
+                request.setRequestHeader("Range", "bytes=" + msg.index + "-" + (msg.index + msg.length - 1));
+                request.addEventListener("load", function() {
+                    callback(request.response);
+                }, false);
+                request.addEventListener("error", onError, false);
+                request.send();
+            }
+
             switch (msg.method){
                 case "init":
                     var request = new XMLHttpRequest();
-                    function onError(){
-                        event.source.postMessage({
-                            response:'onerror',
-                            error:ERR_HTTP_RANGE,
-                            id:msg.id
-                        },event.origin);
-                    }
+
                     request.addEventListener("load", function() {
                         if (request.getResponseHeader("Accept-Ranges") == "bytes"){
                             event.source.postMessage({
@@ -39,6 +53,18 @@
                     request.addEventListener("error", onError, false);
                     request.open("HEAD", msg.url);
                     request.send();
+                    break;
+
+
+                case "readUint8Array":
+                    readArrayBuffer(function(arraybuffer) {
+                        event.source.postMessage({
+                            response:'callback',
+                            buffer:arraybuffer,
+                            id:msg.id
+                        },event.origin,[arraybuffer]);
+
+                    });
                     break;
                 default:
                     console.log("ERROR:unknown method "+msg.method);
@@ -130,19 +156,27 @@
 
     function HttpRangeReaderCORS(foreignSiteProxyURL,url) {
         initCORSProxyClient();
-
+        this.corsProxyServer=null;
         var self = this;
         function init(callback, onerror) {
 
-            if (!document.getElementById("cors-proxy-server")){
-                var frame = document.createElement("iframe");
+            var frame = document.getElementById("cors-proxy-server");
+            if (!frame){
+                frame = document.createElement("iframe");
                 frame.setAttribute("src",foreignSiteProxyURL);
                 frame.setAttribute("id","cors-proxy-server");
-                frame.setAttribute("style","display:none");
+               // frame.setAttribute("style","display:none");
                 document.body.appendChild(frame);
                 frame.addEventListener('load',function(){
                     self.corsProxyServer = frame.contentWindow;
+                    frame.setAttribute("ready","yes");
                 });
+
+            } else {
+                if (frame.getAttribute("ready") == "yes"){
+                    self.corsProxyServer = frame.contentWindow;
+                }
+
 
             }
 
@@ -181,7 +215,7 @@
             } else {
                 setTimeout(function(){
                     self.init(callback,onerror);
-                },0);
+                },10);
             }
 
         }
@@ -194,9 +228,9 @@
             currentMessages[id ] = {
                 id: id,
                 callback: function(response){
-                    self.size=response.size;
+
                     delete currentMessages[id];
-                    callback();
+                    callback(new Uint8Array(response.buffer));
                 },
                 onerror : function(err){
                     delete currentMessages[id];
