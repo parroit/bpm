@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://localhost:8080/src/zip.js/zip.js"></script>
+    <script src="http://localhost:8080/src/zip.js/zip-fs.js"></script>
+    <script src="http://localhost:8080/src/zip.js/mime-types.js"></script>
+    <script src="http://localhost:8080/src/zip.js/zip-ext.js"></script>
+    <script src="http://localhost:8080/src/HttpRangeReaderCORS.js"></script>
+    <script>
+        zip.fs.initCORSProxyServer("http://localhost:8080");
+    </script>
+</head>
+<body>
+    <h1>This is zip.js CORS proxy server page</h1>
+</body>
+</html>
