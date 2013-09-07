@@ -115,9 +115,9 @@ var bpm = (function () {
 
 
                 var zipFs = new zip.fs.FS();
-                zipFs.importHttpContent(
+                zipFs.importHttpContentCORS(
+                    baseRepoUrl+"proxy.html",
                     url,
-                    "useRangeHeader" == true,
                     function success() {
 
                         zipFs.root.getFileEntry(dirEntry, function () {
@@ -128,6 +128,7 @@ var bpm = (function () {
                     function failure(error) {
                         console.log(error);
                     }
+
                 );
             });
         };

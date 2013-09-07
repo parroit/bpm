@@ -23,8 +23,8 @@
   
   <body>
 
-
-
+  <!--<script src="../../xdomain/dist/xdomain.js" slave="http://parroit.github.io/bpm/proxy.html"></script>
+-->
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
@@ -35,10 +35,12 @@
     <script src="../../src/zip.js/zip-fs.js"></script>
     <script src="../../src/zip.js/mime-types.js"></script>
     <script src="../../src/zip.js/zip-ext.js"></script>
+  <script src="../../src/HttpRangeReaderCORS.js"></script>
     <script src="../../src/bpm.js"></script>
     
     <script>
         bpm.useRepository("http://parroit.github.io/bpm/repo/");
+        //bpm.useRepository("http://localhost:3000/repo/");
         bpm.createEmptyRepo(function(){
 
             //testami ver. 0 will check if two independent version
