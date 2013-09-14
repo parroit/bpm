@@ -1,0 +1,18 @@
+{
+    "name": "testami",
+    "version": "0.0.1",
+    "description": "the awesome test package of bpm",
+    "author": "Andrea Parodi",
+    "keywords": ["awesome", "bpm", "test"],
+    "repository" : {
+        "type": "git",
+        "url": "https://github.com/parroit/bootstrap-npm.git"
+    },
+    "engines": { 
+        "chrome": "*" 
+    },
+    "dependencies": { 
+        
+    },
+    "main": "testami.js"
+}

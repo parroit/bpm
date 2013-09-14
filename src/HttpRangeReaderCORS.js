@@ -125,7 +125,7 @@
                 frame = document.createElement("iframe");
                 frame.setAttribute("src",foreignSiteProxyURL);
                 frame.setAttribute("id","cors-proxy-server");
-               // frame.setAttribute("style","display:none");
+                frame.setAttribute("style","display:none");
                 document.body.appendChild(frame);
                 frame.addEventListener('load',function(){
                     self.corsProxyServer = frame.contentWindow;
@@ -164,9 +164,12 @@
                     url: url,
                     id: id
                 };
-               
-                self.corsProxyServer.postMessage(msg, foreignSiteProxyURL);
-                
+
+                try{
+                    self.corsProxyServer.postMessage(msg, foreignSiteProxyURL);
+                } catch (err) {
+                    throw new Error("Error while posting message to proxy iframe: check that " + foreignSiteProxyURL + " is available. You must use absolute url e.g. http:/some.thing/your/path.html. ERROR:" + err);
+                }
 
             }
 

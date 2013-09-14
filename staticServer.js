@@ -1,3 +1,11 @@
+var express = require('express');
+var app = express();
+
+
+app.use(express.static('/src/bpm/sources'));
+
+
+/*
 var http = require("http"),
     url = require("url"),
     path = require("path"),
@@ -35,4 +43,7 @@ http.createServer(function(request, response) {
     });
 }).listen(parseInt(port, 10));
 
-console.log("Static file server running at\n  => http://localhost:" + port + "/\nCTRL + C to shutdown");
+console.log("Static file server running at\n  => http://localhost:" + port + "/\nCTRL + C to shutdown");*/
+
+app.listen(8080);
+console.log('Listening on port 8080');
