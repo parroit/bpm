@@ -1,12 +1,37 @@
 {
-    "name": "bpm_static_server",
-    "description": "bpm static server",
-    "version": "0.0.1",
-    "private": true,
-    "dependencies": {
-        "express": "3.x"
-
-
-    },
-    "main":"staticServer.js"
+  "name": "bpm",
+  "description": "javascript browser package manager",
+  "version": "0.1.0",
+  "homepage": "https://github.com/parroit/bpm",
+  "author": {
+    "name": "Andrea Parodi",
+    "email": "andrea.parodi@ebansoftware.net"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/parroit/bpm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/parroit/bpm/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/parroit/bpm/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/bpm",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-mocha-test": "~0.7.0",
+    "expect.js": "~0.2.0",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "keywords": []
 }

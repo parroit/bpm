@@ -1,5 +1,8 @@
-NPM
+bpm
 ===
+
+[![Build Status](https://secure.travis-ci.org/parroit/bpm.png?branch=master)](http://travis-ci.org/parroit/bpm)  [![Npm module](https://badge.fury.io/js/bpm.png)](https://npmjs.org/package/bpm) [![Code Climate](https://codeclimate.com/github/parroit/bpm.png)](https://codeclimate.com/github/parroit/bpm)
+
 <img src="http://parroit.github.io/bpm/img/logo-solo.png">
 
 
