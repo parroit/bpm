@@ -14,7 +14,7 @@ module.exports = function(grunt) {
             }
         },
         compress: {
-            main: {
+            simple: {
                 options: {
                     archive: 'test/simple.zip'
                 },
@@ -24,6 +24,20 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         src: ['simple/**'],
+                        cwd: 'test/usecase/'
+                    }
+                ]
+            },
+             'multi-module': {
+                options: {
+                    archive: 'test/multi-module.zip'
+                },
+                files: [
+                    // Each of the files in the src/ folder will be output to
+                    // the dist/ folder each with the extension .gz.js
+                    {
+                        expand: true,
+                        src: ['multi-module/**'],
                         cwd: 'test/usecase/'
                     }
                 ]
@@ -46,7 +60,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('test', 'mochaTest');
     grunt.registerTask('watch-test', 'watch');
-    grunt.registerTask('usecase', 'compress');
+    grunt.registerTask('usecase', ['compress:simple','compress:multi-module']);
 
 
 };

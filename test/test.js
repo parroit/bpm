@@ -10,3 +10,17 @@ asyncTest("load simple package without dependencies", function() {
 
 
 });
+
+
+asyncTest("load package with dependencies", function() {
+    expect(1);
+
+    install("multi-module", function(require) {
+        var gogogo = require("multi-module");
+
+        ok(gogogo() === "a module-b module");
+        start();
+    });
+
+
+});
