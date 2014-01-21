@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
@@ -13,7 +13,22 @@ module.exports = function (grunt) {
                 }
             }
         },
-
+        compress: {
+            main: {
+                options: {
+                    archive: 'test/simple.zip'
+                },
+                files: [
+                    // Each of the files in the src/ folder will be output to
+                    // the dist/ folder each with the extension .gz.js
+                    {
+                        expand: true,
+                        src: ['simple/**'],
+                        cwd: 'test/usecase/'
+                    }
+                ]
+            }
+        },
         mochaTest: {
             test: {
                 options: {
@@ -24,12 +39,14 @@ module.exports = function (grunt) {
         }
     });
 
-    // These plugins provide necessary tasks.
+
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-mocha-test');
+    grunt.loadNpmTasks('grunt-contrib-compress');
 
     grunt.registerTask('test', 'mochaTest');
     grunt.registerTask('watch-test', 'watch');
+    grunt.registerTask('usecase', 'compress');
 
 
 };
